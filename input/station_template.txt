@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<swes:InsertSensor xmlns:swes="http://www.opengis.net/swes/2.0"
+    xmlns:sos="http://www.opengis.net/sos/2.0" xmlns:swe="http://www.opengis.net/swe/1.0.1"
+    xmlns:sml="http://www.opengis.net/sensorML/1.0.1" xmlns:gml="http://www.opengis.net/gml"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    service="SOS" version="2.0.0"
+    xsi:schemaLocation="http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sosInsertSensor.xsd   http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd">
+    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+    <swes:procedureDescription>
+        <sml:SensorML version="1.0.1">
+            <sml:member>
+                <sml:System>
+
+                    <sml:identification>
+                        <sml:IdentifierList>
+                            <sml:identifier name="uniqueID">
+                                <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:uniqueID">
+                                    <sml:value>urn:x-epaiwpp:station:{urn-org}:{suborg}:{stationid}</sml:value>
+                                </sml:Term>
+                            </sml:identifier>
+                            <sml:identifier name="stationID">
+                                <sml:Term
+                                    definition="http://mmisw.org/ont/ioos/definition/stationID">
+                                    <sml:value>urn:x-epaiwpp:station:{urn-org}:{suborg}:{stationid}</sml:value>
+                                </sml:Term>
+                            </sml:identifier>
+                            <sml:identifier name="shortName">
+                                <sml:Term
+                                    definition="http://mmisw.org/ont/ioos/definition/shortName">
+                                    <sml:value>{shortName}</sml:value>
+                                </sml:Term>
+                            </sml:identifier>
+                            <sml:identifier name="longName">
+                                <sml:Term definition="http://mmisw.org/ont/ioos/definition/longName">
+                                    <sml:value>{longName}
+                                    </sml:value>
+                                </sml:Term>
+                            </sml:identifier>
+                        </sml:IdentifierList>
+                    </sml:identification>
+                    
+                    <sml:classification>
+                        <sml:ClassifierList>
+                            <sml:classifier name="waterbodyType">
+                                <sml:Term definition="urn:x-epaiwpp:def:general">
+                                    <sml:value>{waterbodyType}</sml:value>
+                                </sml:Term>
+                            </sml:classifier>
+                            <sml:classifier name="platformType">
+                                <sml:Term
+                                    definition="http://mmisw.org/ont/ioos/definition/platformType">
+                                    <sml:codeSpace xlink:href="http://mmisw.org/ont/ioos/platform"/>
+                                    <sml:value>Fixed Platform</sml:value>
+                                </sml:Term>
+                            </sml:classifier>
+                            <sml:classifier name="operatorSector">
+                                <sml:Term
+                                    definition="http://mmisw.org/ont/ioos/definition/operatorSector">
+                                    <sml:codeSpace xlink:href="http://mmisw.org/ont/ioos/sector"/>
+                                    <sml:value>Government-State</sml:value>
+                                </sml:Term>
+                            </sml:classifier>
+                            <sml:classifier name="publisher">
+                                <sml:Term
+                                    definition="http://mmisw.org/ont/ioos/definition/publisher">
+                                    <sml:codeSpace
+                                        xlink:href="http://mmisw.org/ont/ioos/organization"/>
+                                    <sml:value>{publisher}
+                                     </sml:value>
+                                </sml:Term>
+                            </sml:classifier>
+                        </sml:ClassifierList>
+                    </sml:classification>
+                    
+                    <sml:capabilities name="offerings">
+                        <swe:SimpleDataRecord>
+                            <swe:field name="undefined">
+                                <swe:Text definition="urn:ogc:def:identifier:OGC:offeringID">
+                                    <gml:name>undefined</gml:name>
+                                    <swe:value>urn:x-epaiwpp:offering:{urn-org}:{suborg}:{stationid}:undefined</swe:value>
+                                </swe:Text>
+                            </swe:field>
+                        </swe:SimpleDataRecord>
+                    </sml:capabilities>
+
+
+                    <sml:capabilities name="featuresOfInterest">
+                        <swe:SimpleDataRecord>
+                            <swe:field name="featureOfInterestID">
+                                <swe:Text>
+                                    <swe:value>urn:x-epaiwpp:feature:{urn-org}:{suborg}:{stationid}:undefined</swe:value>
+                                </swe:Text>
+                            </swe:field>
+                        </swe:SimpleDataRecord>
+                    </sml:capabilities>
+                    
+                    <sml:contact>
+                        <sml:ContactList>
+                            <sml:member xlink:role="http://mmisw.org/ont/ioos/definition/publisher">
+                                <sml:ResponsibleParty>
+                                    <sml:organizationName>{organizationName}
+                                        </sml:organizationName>
+                                    <sml:contactInfo>
+                                        <sml:address>
+                                            <sml:country>USA</sml:country>
+                                            <sml:electronicMailAddress>{contact}</sml:electronicMailAddress>
+                                        </sml:address>
+                                        <sml:onlineResource xlink:href="http://{organizationURL}"/>
+                                    </sml:contactInfo>
+                                </sml:ResponsibleParty>
+                            </sml:member>
+                        </sml:ContactList>
+                    </sml:contact>
+                    
+                    <sml:position name="sensorPosition">
+                        <swe:Position referenceFrame="urn:ogc:def:crs:EPSG::4326">
+                            <swe:location>
+                                <swe:Vector gml:id="STATION_LOCATION">
+                                    <swe:coordinate name="easting">
+                                        <swe:Quantity axisID="x">
+                                            <swe:uom code="degree"/>
+                                            <swe:value>{easting}</swe:value>
+                                        </swe:Quantity>
+                                    </swe:coordinate>
+                                    <swe:coordinate name="northing">
+                                        <swe:Quantity axisID="y">
+                                            <swe:uom code="degree"/>
+                                            <swe:value>{northing}</swe:value>
+                                        </swe:Quantity>
+                                    </swe:coordinate>
+                                    <swe:coordinate name="altitude">
+                                        <swe:Quantity axisID="z">
+                                            <swe:uom code="m"/>
+                                            <swe:value>{altitude}</swe:value>
+                                        </swe:Quantity>
+                                    </swe:coordinate>
+                                </swe:Vector>
+                            </swe:location>
+                        </swe:Position>
+                    </sml:position>
+                    
+                    <sml:inputs>
+                        <sml:InputList>
+                            <sml:input name="undefined">
+                                <swe:ObservableProperty
+                                    definition="urn:x-epaiwpp:observable:undefined"/>
+                            </sml:input>
+                        </sml:InputList>
+                    </sml:inputs>
+                    <sml:outputs>
+                        <sml:OutputList>
+                            <sml:output name="undefined">
+                                <swe:Quantity
+                                    definition="urn:x-epaiwpp:observable:undefined">
+                                    <swe:uom code="undefined"/>
+                                </swe:Quantity>
+                            </sml:output>
+                        </sml:OutputList>
+                    </sml:outputs>
+                    
+                </sml:System>
+            </sml:member>
+        </sml:SensorML>
+    </swes:procedureDescription>
+    <swes:observableProperty>urn:x-epaiwpp:observable:undefined</swes:observableProperty>
+    <swes:metadata>
+        <sos:SosInsertionMetadata>
+            <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+            <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation</sos:observationType>
+            <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CountObservation</sos:observationType>
+            <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TextObservation</sos:observationType>
+            <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TruthObservation</sos:observationType>
+            <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_GeometryObservation</sos:observationType>
+            <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_SWEArrayObservation</sos:observationType>
+            <!-- multiple values possible -->
+            <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:SosInsertionMetadata>
+    </swes:metadata>
+</swes:InsertSensor>

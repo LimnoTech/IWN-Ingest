@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sos:InsertResultTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:swes="http://www.opengis.net/swes/2.0" xmlns:sos="http://www.opengis.net/sos/2.0"
+    xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:sml="http://www.opengis.net/sensorML/1.0.1"
+    xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:om="http://www.opengis.net/om/2.0" xmlns:sams="http://www.opengis.net/samplingSpatial/2.0"
+    xmlns:sf="http://www.opengis.net/sampling/2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    service="SOS" version="2.0.0"
+    xsi:schemaLocation="http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sosInsertResultTemplate.xsd http://www.opengis.net/om/2.0 http://schemas.opengis.net/om/2.0/observation.xsd  http://www.opengis.net/samplingSpatial/2.0 http://schemas.opengis.net/samplingSpatial/2.0/spatialSamplingFeature.xsd">
+    <sos:proposedTemplate>
+        <sos:ResultTemplate>
+            <!-- ===== IDENTIFIER FOR TEMPLATE (links forward to result being inserted) -->
+            <swes:identifier>urn:x-epaiwpp:template:{urn-org}:{suborg}:{stationid}:{status}:{parameter}</swes:identifier>
+            <!-- ===== OFFERING (links back to offerings for sensor/station procedure) -->
+            <sos:offering>urn:x-epaiwpp:offering:{urn-org}:{suborg}:{stationid}:{status}:{parameter}</sos:offering>
+            <sos:observationTemplate>
+                <om:OM_Observation gml:id="sensor2obsTemplate">
+                    <om:type
+                        xlink:href="http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"/>
+                    <om:phenomenonTime nilReason="template"/>
+                    <om:resultTime nilReason="template"/>
+                    <!--- ===== PROCEDURE (links back to sensor/station procedure) -->
+                    <om:procedure xlink:href="urn:x-epaiwpp:sensor:{urn-org}:{suborg}:{stationid}:{status}:{parameter}"/>
+                    <!--- ===== OBSERVED PROPERTY (links back to property in sensor/station procedure -->
+                    <om:observedProperty xlink:href="urn:x-epaiwpp:observable:{parameter}"/>
+                    <om:featureOfInterest>
+                        <!-- ===== UNIQUE FEATURE ID and identifier for station -->
+                        <sams:SF_SpatialSamplingFeature gml:id="{urn-org}_{stationid}">
+                            <gml:identifier codeSpace="">urn:x-epaiwpp:feature:{urn-org}:{suborg}:{stationid}</gml:identifier>
+                            <gml:name>{stationid}</gml:name>
+                            <sf:type
+                                xlink:href="http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint"/>
+                            <sf:sampledFeature
+                                xlink:href="http://www.opengis.net/def/nil/OGC/0/unknown"/>
+                            <sams:shape>
+                                <!-- ===== UNIQUE POINT ID -->
+                                <gml:Point gml:id="{urn-org}_Point_{stationid}">
+                                    <gml:pos srsName="http://www.opengis.net/def/crs/EPSG/0/4326"
+                                        >{northing} {easting}</gml:pos>
+                                </gml:Point>
+                            </sams:shape>
+                        </sams:SF_SpatialSamplingFeature>
+                    </om:featureOfInterest>
+                    <om:result/>
+                </om:OM_Observation>
+            </sos:observationTemplate>
+            <sos:resultStructure>
+                <swe:DataRecord>
+                    <swe:field name="phenomenonTime">
+                        <swe:Time
+                            definition="http://www.opengis.net/def/property/OGC/0/PhenomenonTime">
+                            <swe:uom
+                                xlink:href="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>
+                        </swe:Time>
+                    </swe:field>
+                    <!-- ===== OBSERVED PARAMETER NAME -->
+                    <swe:field name="{fieldName}">
+                        <!--- ===== OBSERVED PROPERTY (links back to property in sensor/station procedure -->
+                        <swe:Quantity definition="urn:x-epaiwpp:observable:{parameter}">
+                            <swe:uom code="parameterUnit"/>
+                        </swe:Quantity>
+                    </swe:field>
+                </swe:DataRecord>
+            </sos:resultStructure>
+            <sos:resultEncoding>
+                <swe:TextEncoding tokenSeparator="," blockSeparator=";"/>
+            </sos:resultEncoding>
+        </sos:ResultTemplate>
+    </sos:proposedTemplate>
+</sos:InsertResultTemplate>

@@ -1,0 +1,9 @@
+stationid,shortName,longName,easting,northing,altitude,organization,organizationURL,contact,waterbodyType,urn-org,urn org subpart
+pythoncrbuoy4,crbuoy,crbuoy,-74.579586,41.103145,170.93,NJDEP - Freshwater Biological Monitoring,www.state.nj.us/dep/wms/bfbm/,Mike.Kusmiesz@dep.nj.gov,River/Stream,NJDEP,python
+pythoncrbuoy5,crbuoy,crbuoy,-74.579586,41.103145,170.93,NJDEP - Freshwater Biological Monitoring,www.state.nj.us/dep/wms/bfbm/,Mike.Kusmiesz@dep.nj.gov,River/Stream,NJDEP,python
+pythoncrbuoy6,crbuoy,crbuoy,-74.579586,41.103145,170.93,NJDEP - Freshwater Biological Monitoring,www.state.nj.us/dep/wms/bfbm/,Mike.Kusmiesz@dep.nj.gov,River/Stream,NJDEP,python
+pythoncrbuoy7,crbuoy,crbuoy,-74.579586,41.103145,170.93,NJDEP - Freshwater Biological Monitoring,www.state.nj.us/dep/wms/bfbm/,Mike.Kusmiesz@dep.nj.gov,River/Stream,NJDEP,python
+pythoncrbuoy3,crbuoy,crbuoy,-74.579586,41.103145,170.93,NJDEP - Freshwater Biological Monitoring,www.state.nj.us/dep/wms/bfbm/,Mike.Kusmiesz@dep.nj.gov,River/Stream,NJDEP,python
+mrbuoy,mrbuoy,Mystic River Buoy at Blessing of the Bay,-71.090129,42.399288,0,EPA Region 1,https://www.epa.gov/mysticriver/live-water-quality-data-mystic-river,Tom Faber 617-918-8672,River/Stream,epa,epar1
+crbuoy,crbuoy,Charles River Buoy at the Boston Museum of Science,-71.071376,42.367187,0,EPA Region 1,https://www.epa.gov/charlesriver/live-water-quality-data-lower-charles-river,Tom Faber 617-918-8672,River/Stream,epa,epar1
+grssy0,grssy0,Grassy Fork,-84.015242,39.132832,100,Clermont County Water Resources Department,http://wrd.clermontcountyohio.gov/,hlubbers@clermontcountyohio.gov,Edge of Field,oh-cty-cle,wrd

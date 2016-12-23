@@ -1,0 +1,18 @@
+{
+    "type":1,
+    "columns":[
+        "date",
+        "time",
+        "temperature",
+        "specific_conductance",
+        "ph",
+        "dissolved_oxygen",
+        "do_pct",
+        "turbidity",
+        "chlorophyll",
+        "phycocyanin",
+        "sysbattery"],
+    "station":"crbuoy",
+    "header":1
+}
+    

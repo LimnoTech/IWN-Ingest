@@ -1,0 +1,12 @@
+,Parameter,Parameter Name,Parameter Units,Parameter Field Name,status
+Temperature C,temperature,Temperature,Celsius,Temperature,raw
+Specific_Conductance mS/cm,specific_conductance,Specific Conductance,mS/cm,Specific_Conductance,raw
+Salinity ppt,salinity,Salinity,ppt,Salinity,raw
+DO %,do_pct,DO percent,%,DO_percent,raw
+DO Concentration mg/l,dissolved_oxygen,Dissolved Oxygen,mg/L,Dissolved_Oxygen,raw
+DO Charge,do_charge,DO Charge,n/a,DO_Charge,raw
+pH,ph,pH,su,pH,raw
+Turbidity NTU,turbidity,Turbidity,NTU,Turbidity,raw
+Chlorophyll ug/l,chlorophyll,Chlorophyll,ug/L,Chlorophyll,raw
+Phycocyanin,phycocyanin,Phycocyanin,rfu,Phycocyanin,raw
+sysbattery,sysbattery,sysbattery,V,sysbattery,raw

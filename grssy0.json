@@ -1,0 +1,14 @@
+{
+    "type":2,
+    "columns":[
+        "datetime",
+        "level",
+        "ph",
+        "dissolved_oxygen",
+        "specific_conductance",
+        "temperature",
+        "rainfall"],
+    "station":"grssy0",
+    "header":7
+}
+    
