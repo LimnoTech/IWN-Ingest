@@ -4,6 +4,9 @@ import json
 CSVCHUNK = 1000
 
 def parse(conf_file,data_file):
+    """
+    Read the type field and chose the associated parser
+    """
     with open(conf_file,'r') as fi:
         conf_str = fi.read()
     config_f = json.loads(conf_str)
@@ -33,6 +36,8 @@ def parse1(conf_file,data_file,config):
                 if ncol == "date":
                     continue
                 elif ncol == "time":
+                    continue
+                elif ncol == "":
                     continue
                 else:
                     for j,nrow in enumerate(r):
@@ -98,6 +103,8 @@ def parse2(conf_file,data_file,config):
                 
                 if ncol == "datetime":
                     continue
+                elif ncol == "":
+                    continue
                 else:
                     for j,nrow in enumerate(r):
                         if j < header:
@@ -155,7 +162,7 @@ def parse3(conf_file,data_file,config):
                 
                 if ncol == "datetime":
                     continue
-                elif ncol == "x":
+                elif ncol == "":
                     continue
                 elif ncol == "station":
                     continue
