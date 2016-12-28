@@ -437,7 +437,7 @@ def push_new_templates(data,last_record,date_filter,stationmeta,parameta):
                     station_record = None
                     for record in stationmeta:
                         
-                        if record['stationid'] == station:
+                        if record['stationid'].lower() == station.lower():
                             station_record = record
                             break
                     if station_record == None:
@@ -453,7 +453,7 @@ def push_new_templates(data,last_record,date_filter,stationmeta,parameta):
                     sensor_record = None
                     sensor_param_record=None
                     for record in stationmeta:
-                        if record['stationid'] == station:
+                        if record['stationid'].lower() == station.lower():
                                 sensor_record = record
                                 break
                     for record in parammeta:
@@ -476,7 +476,7 @@ def push_new_templates(data,last_record,date_filter,stationmeta,parameta):
                     result_record = None
                     result_param_record=None
                     for record in stationmeta:
-                        if record['stationid'] == station:
+                        if record['stationid'].lower() == station.lower():
                                 result_record = record
                                 break
                     for record in parammeta:
@@ -505,7 +505,7 @@ def push_new_templates(data,last_record,date_filter,stationmeta,parameta):
                     sensor_record = None
                     sensor_param_record=None
                     for record in stationmeta:
-                        if record['stationid'] == station:
+                        if record['stationid'].lower() == station.lower():
                                 sensor_record = record
                                 break
                     for record in parammeta:
@@ -528,7 +528,7 @@ def push_new_templates(data,last_record,date_filter,stationmeta,parameta):
                     result_record = None
                     result_param_record=None
                     for record in stationmeta:
-                        if record['stationid'] == station:
+                        if record['stationid'].lower() == station.lower():
                                 result_record = record
                                 break
                     for record in parammeta:
@@ -610,7 +610,7 @@ if __name__ == "__main__":
                     status = i['status'].lower()
                     break
             for i in stationmeta:
-                if k[0] == i['stationid']:
+                if k[0].lower() == i['stationid'].lower():
                     urnorg = i['urn-org'].lower()
                     suborg = i['suborg'].lower()
                     break
