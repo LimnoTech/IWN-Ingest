@@ -591,7 +591,7 @@ if __name__ == "__main__":
         #------------------------
         # Check data for missing templates
         #------------------------
-        ###!!!!###  Need to pre-process data file to get into station|date|time|parameter|Value 
+         
         
         #loop through the data file and determine what has to be done for each data point
         last_record = check_data(nfile,unique_offers)

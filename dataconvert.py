@@ -209,5 +209,6 @@ def parse3(conf_file,data_file,config):
                 
 
 if __name__ == "__main__":
+    #used only for testing
     parse("njdep.json","c:/data/njdep.csv")           
 
