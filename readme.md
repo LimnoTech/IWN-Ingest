@@ -59,29 +59,28 @@ The following example is shown to demonstrate formatting:
 
 {
 
-
-    &quot;type&quot;:2,
-
-    &quot;columns&quot;:[
-
-        &quot;datetime&quot;,
-
-        &quot;water\_level&quot;,
-
-        &quot;ph&quot;,
-
-        &quot;dissolved\_oxygen&quot;,
-
-        &quot;specific\_conductance&quot;,
-
-        &quot;temperature&quot;,
-
-        &quot;rainfall&quot;],
-
-    &quot;station&quot;:&quot;grssy0&quot;,
-
-    &quot;header&quot;:7
-
+    "type":2,
+    
+    "columns":[
+    
+        "datetime",
+        
+        "water_level",
+        
+        "ph",
+        
+        "dissolved_oxygen",
+        
+        "specific_conductance",
+        
+        "temperature",
+        
+        "rainfall"],
+        
+    "station":"grssy0",
+    
+    "header":7
+    
 }
 
 ## Station metadata file (station\_metadata.csv)
