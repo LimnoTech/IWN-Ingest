@@ -45,8 +45,6 @@ metadata_headers=[
     'organizationURL',
     'contact',
     'waterbodyType',
-    'publisher',
-    'status',
     'urn-org',
     'suborg']
 
@@ -184,9 +182,11 @@ def read_station_meta(station_meta_path,metadata_headers):
                 continue #skip header row
             else: 
                 try:
-                    dict_l = dict(zip(metadata_headers,escape(row))) #escape the string for xml
+                    dict_l = dict(zip(metadata_headers,row)) #escape the string for xml
                 except :
-                    print("metadata - header mismatch") #if zip fails (likely because number of columns don't match)
+                    print("station metadata - header mismatch") #if zip fails (likely because number of columns don't match)
+                    print(metadata_headers)
+                    print(escape(row))
                 stationdata_l.append(dict_l)
     return stationdata_l
 
@@ -288,7 +288,7 @@ def check_data(data_file,unique_offers):
             if i == 0:
                 continue #skip header row
             else:
-                station = row[0]
+                station = row[0].lower()
                 parameter = row[3]
                 if VERBOSE:
                     log_entry(".","{} - Station: {} Parameter {}".format(i,station,parameter))
@@ -324,7 +324,7 @@ def get_unique_station_sensor(data_file,date_filter):
                 continue
             else:
                 j = i-1
-                stationid = row[0]
+                stationid = row[0].lower()
                 parameter = row[3]
                 if not date_filter[j]:
                     continue #or do something with it
@@ -387,7 +387,7 @@ def accumulate_data(unique_station_sensor,data,date_filter):
 
 def create_data_request(data_template, k,v,status,urnorg,suborg):
     
-    stationid = k[0]
+    stationid = k[0].lower()
     parameter = k[1]
     # status = "final"
     # suborg = "python"
@@ -429,7 +429,7 @@ def push_new_templates(data,last_record,date_filter,stationmeta,parameta):
                 status = last_record[j][0]
                 if status == 'station_sensor':
                     # Get pertinent info
-                    station = last_record[j][1][0]
+                    station = last_record[j][1][0].lower()
                     parameter = last_record[j][1][1]
                     #
                     #PROCESS STATION TEMPLATE
@@ -496,7 +496,7 @@ def push_new_templates(data,last_record,date_filter,stationmeta,parameta):
                     alreadyprocessed.append(last_record[j])
 
                 elif status == 'sensor':
-                    station = last_record[j][1][0]
+                    station = last_record[j][1][0].lower()
                     parameter = last_record[j][1][1]
                     #lookup station parameter in metadata_headers
                     #

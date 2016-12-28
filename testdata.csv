@@ -1,0 +1,7 @@
+Station,Huc14,Latitude,Longitude,System_ID,county,municipality,Date_Time,Temperature C,Specific_Conductance mS/cm,Salinity ppt,DO %,DO Concentration mg/l,DO Charge,pH,Turbidity NTU,Chlorophyll ug/l
+BB04a,2.0403E+12,39.93289,-74.14069,4,OCEAN,Berkeley Township,6/10/2015 10:16,22.55,29.69,18.39,98.2,7.64,,7.85,0.7,11.3
+BB04a,2.0403E+12,39.93289,-74.14069,4,OCEAN,Berkeley Township,6/10/2015 10:31,22.58,29.4,18.2,98.8,7.69,,7.86,0.8,11.8
+BB04a,2.0403E+12,39.93289,-74.14069,4,OCEAN,Berkeley Township,6/10/2015 10:46,22.6,29.81,18.48,99.6,7.74,,7.87,0.8,11
+BB04a,2.0403E+12,39.93289,-74.14069,4,OCEAN,Berkeley Township,6/10/2015 11:01,22.7,29.12,18.01,101,7.85,,7.89,0.8,11.9
+BB04a,2.0403E+12,39.93289,-74.14069,4,OCEAN,Berkeley Township,6/10/2015 11:16,22.72,29.27,18.11,102.2,7.94,,7.89,0.8,11.2
+BB04a,2.0403E+12,39.93289,-74.14069,4,OCEAN,Berkeley Township,6/10/2015 11:31,22.71,29.91,18.54,102.6,7.96,,7.9,0.9,13.7
