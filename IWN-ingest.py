@@ -20,7 +20,11 @@ VERBOSE = False
 #url = "http://ec2-52-43-146-68.us-west-2.compute.amazonaws.com:8080/52b-sos-webapp-437/service"
 #url = "http://45.55.86.218:8080/52n-sos-webapp/service"
 #url = "http://localhost:8080/52n-sos-webapp/service"
-url="http://ec2-35-166-3-66.us-west-2.compute.amazonaws.com:8080/52n-sos-webapp/service"
+URLFILE = "server.conf"
+#type the server url in the server.conf file
+with open(URLFILE,'r') as fo:
+    url = fo.read()
+#url="http://ec2-35-166-3-66.us-west-2.compute.amazonaws.com:8080/52n-sos-webapp/service"
 debugprint = True
 station_meta_path="input/metadata_station.csv"
 parameter_meta_path="input/metadata_parameter.csv"
