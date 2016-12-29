@@ -20,7 +20,11 @@ VERBOSE = False
 #url = "http://ec2-52-43-146-68.us-west-2.compute.amazonaws.com:8080/52b-sos-webapp-437/service"
 #url = "http://45.55.86.218:8080/52n-sos-webapp/service"
 #url = "http://localhost:8080/52n-sos-webapp/service"
-url="http://ec2-35-166-3-66.us-west-2.compute.amazonaws.com:8080/52n-sos-webapp/service"
+URLFILE = "server.conf"
+#type the server url in the server.conf file
+with open(URLFILE,'r') as fo:
+    url = fo.read()
+#url="http://ec2-35-166-3-66.us-west-2.compute.amazonaws.com:8080/52n-sos-webapp/service"
 debugprint = True
 station_meta_path="input/metadata_station.csv"
 parameter_meta_path="input/metadata_parameter.csv"
@@ -33,6 +37,7 @@ LOG_FILE="debug/log.txt"
 DATA_VALUES1 ="tempdata.csv"
 DEFAULT_DATE = datetime(2999,1,1)
 
+#station metadata file must have columns in the following order
 metadata_headers=[
     'stationid',
     'shortName',
@@ -44,11 +49,10 @@ metadata_headers=[
     'organizationURL',
     'contact',
     'waterbodyType',
-    'publisher',
-    'status',
     'urn-org',
     'suborg']
 
+#parameter metadata file must have columns in the following order
 parameter_headers=[
     'parameter',
     'parameterName',
@@ -57,6 +61,7 @@ parameter_headers=[
     'status',
     'comment']
 
+#Shortcuts to information in GetCapabiities
 offerkey = [
     ['id', "./ns5:identifier", 1],
     ['name',"./ns5:name", 1],
@@ -71,6 +76,7 @@ offerkey = [
     ['resultbegin',"./ns0:resultTime/ns6:TimePeriod/ns6:beginPosition",1],
     ['resultend',"./ns0:resultTime/ns6:TimePeriod/ns6:endPosition",1]]
 
+#Shorthand for namespaces in xml
 namespaces = {
     'ns0':"http://www.opengis.net/sos/2.0",
     'ns2':"http://www.opengis.net/ows/1.1",
@@ -87,22 +93,34 @@ namespaces = {
 #*****************
 
 def log_entry(symbol, log_text):
+    """
+    Helper function to create log entry
+    """
     with open(LOG_FILE,'a') as fo:
         fo.write("{} [{}] - {}\n".format(symbol, str(datetime.now()),log_text))
 
 def create_offer_dict(noff):
     off_d = {}
+    #cycle through every offering of interest (global variable) and create dict of individual offer
     for field in offerkey:
         for i in range(field[2]):
             off_d[field[0]] = [j.text for j in noff.findall(field[1],namespaces)]
     return off_d
 
 def parse_capabilities(url):
+    """
+    Requests GetCapabilities and returns a list made up of a dictionary of each observation
+    offering
+    """
+    #request GetCapabilities
     r = ur.urlopen(url+"?service=SOS&request=GetCapabilities")
+    #create walkable tree of xml response
     tree = ET.parse(r)
+    #write the capabilities xml file to capabilities.xml
     with open('debug/capabilities.xml','wb') as of:
         tree.write(of)
     root = tree.getroot()
+    #create a list of all ObservationOffering
     offerings_l = root.findall('./ns0:contents/ns0:Contents/ns5:offering/ns0:ObservationOffering',namespaces)
     offer_list = []
     for noffer in offerings_l:
@@ -114,6 +132,7 @@ def parse_capabilities(url):
     return offer_list
 
 def pull_capability_data(offer_list):
+    #write the list of offerings to debug/offer.csv for review
     with open('debug/offer.csv','w') as fo:
         fo.write("id,org,suborg,stationid,status,parameter,phenombegin,phenomend,resbegin,resend\n")
         unique_offers = []
@@ -155,22 +174,32 @@ def pull_capability_data(offer_list):
     return unique_offers
         
 def read_station_meta(station_meta_path,metadata_headers):
+    """
+    Function to read station metadata File 
+    """
     log_entry("-","Read metadata from {}".format(station_meta_path))
     stationdata_l = []
     with open(station_meta_path) as fr:
         stat_reader = csv.reader(fr)
-        for i,row in enumerate(stat_reader):
+        for i,rawrow in enumerate(stat_reader):
+            row = [escape(entry) for entry in rawrow] #escape the station metadata
             if i == 0:
                 continue #skip header row
             else: 
                 try:
-                    dict_l = dict(zip(metadata_headers,escape(row))) ##escape(row)))
+                    #print(row)
+                    dict_l = dict(zip(metadata_headers,row)) #escape the string for xml
                 except :
-                    print("metadata - header mismatch")
+                    print("station metadata - header mismatch") #if zip fails (likely because number of columns don't match)
+                    #print(metadata_headers)
+                    #print(escape(row))
                 stationdata_l.append(dict_l)
     return stationdata_l
 
 def read_parameter_meta(parameter_meta_path,parameter_headers):
+    """
+    Function to read parameter metadata File 
+    """
     log_entry("-","read metadata from {}".format(parameter_meta_path))
     parameterdata_l = []
     with open(parameter_meta_path) as fr:
@@ -179,6 +208,7 @@ def read_parameter_meta(parameter_meta_path,parameter_headers):
             if i == 0:
                 continue #skip header row
             else:
+                #throw an error if number of columns don't match expected
                 assert (len(parameter_headers) == len(row)),"Parameter Metadata Header and Row mismatch."
                 dict_l = dict(zip(parameter_headers,row))
                 parameterdata_l.append(dict_l)
@@ -243,27 +273,36 @@ def push_template(station_str, url):
     return r
 
 def check_data(data_file,unique_offers):
+    """
+    Creates a list that has the same length as data points in data file 
+    Each list entry is a tuple with the following:
+    "ok" - station and sensor exist on server, just push result 
+    "sensor" - station exists on server, push sensor and result 
+    "station" - neither station or sensor exist on server. push station, sensor, and result
+    """
     #log_entry("-", "Check offerings for missing stations and sensors")
     last_record = []
+    #create list of stations already on server
     station_list = [s[0] for s in unique_offers]
     station_match_flag = False
     station_sensor_flag = False
 
     with open(data_file,'r') as fr:
+        #open the data file 
         r = csv.reader(fr)
         for i, row in enumerate(r):
             if i == 0:
                 continue #skip header row
             else:
-                station = row[0]
+                station = row[0].lower()
                 parameter = row[3]
                 if VERBOSE:
                     log_entry(".","{} - Station: {} Parameter {}".format(i,station,parameter))
                 #check if station is in offering
                 #stops when it finds a match, because offering should be unique
-                if station in station_list:
+                if station in station_list: #if the station is already on the server
                     append_value = ("sensor",(station,parameter))
-                    for st, par, date in unique_offers:
+                    for st, par, date in unique_offers: #check if the data result is already on the server
                         
                         if station == st:
                             if parameter == par:
@@ -278,7 +317,7 @@ def check_data(data_file,unique_offers):
 def get_unique_station_sensor(data_file,date_filter):
     """
     Input: data_file:csv file
-    Output: 
+    Output: a list of the unique station/sensor combinations
     """
     with open(data_file,'r') as fi:
         r = csv.reader(fi)
@@ -291,7 +330,7 @@ def get_unique_station_sensor(data_file,date_filter):
                 continue
             else:
                 j = i-1
-                stationid = row[0]
+                stationid = row[0].lower()
                 parameter = row[3]
                 if not date_filter[j]:
                     continue #or do something with it
@@ -301,6 +340,9 @@ def get_unique_station_sensor(data_file,date_filter):
     return unique_station_sensor
 
 def check_dates(data_file,last_record):
+    """
+    Return a list of booleans that show True if the date of the entry is after the date already on server
+    """
     date_filter=[]
     with open(data_file,'r') as fi:
         r = csv.reader(fi)
@@ -325,6 +367,9 @@ def check_dates(data_file,last_record):
 
 
 def accumulate_data(unique_station_sensor,data,date_filter):
+    """
+    Prep the data in a format easy to push to the server
+    """
     rolled_up_data = {}
     with open(data,'r') as fi:
         r = csv.reader(fi)
@@ -348,7 +393,7 @@ def accumulate_data(unique_station_sensor,data,date_filter):
 
 def create_data_request(data_template, k,v,status,urnorg,suborg):
     
-    stationid = k[0]
+    stationid = k[0].lower()
     parameter = k[1]
     # status = "final"
     # suborg = "python"
@@ -390,7 +435,7 @@ def push_new_templates(data,last_record,date_filter,stationmeta,parameta):
                 status = last_record[j][0]
                 if status == 'station_sensor':
                     # Get pertinent info
-                    station = last_record[j][1][0]
+                    station = last_record[j][1][0].lower()
                     parameter = last_record[j][1][1]
                     #
                     #PROCESS STATION TEMPLATE
@@ -398,7 +443,7 @@ def push_new_templates(data,last_record,date_filter,stationmeta,parameta):
                     station_record = None
                     for record in stationmeta:
                         
-                        if record['stationid'] == station:
+                        if record['stationid'].lower() == station.lower():
                             station_record = record
                             break
                     if station_record == None:
@@ -414,7 +459,7 @@ def push_new_templates(data,last_record,date_filter,stationmeta,parameta):
                     sensor_record = None
                     sensor_param_record=None
                     for record in stationmeta:
-                        if record['stationid'] == station:
+                        if record['stationid'].lower() == station.lower():
                                 sensor_record = record
                                 break
                     for record in parammeta:
@@ -437,7 +482,7 @@ def push_new_templates(data,last_record,date_filter,stationmeta,parameta):
                     result_record = None
                     result_param_record=None
                     for record in stationmeta:
-                        if record['stationid'] == station:
+                        if record['stationid'].lower() == station.lower():
                                 result_record = record
                                 break
                     for record in parammeta:
@@ -457,7 +502,7 @@ def push_new_templates(data,last_record,date_filter,stationmeta,parameta):
                     alreadyprocessed.append(last_record[j])
 
                 elif status == 'sensor':
-                    station = last_record[j][1][0]
+                    station = last_record[j][1][0].lower()
                     parameter = last_record[j][1][1]
                     #lookup station parameter in metadata_headers
                     #
@@ -466,7 +511,7 @@ def push_new_templates(data,last_record,date_filter,stationmeta,parameta):
                     sensor_record = None
                     sensor_param_record=None
                     for record in stationmeta:
-                        if record['stationid'] == station:
+                        if record['stationid'].lower() == station.lower():
                                 sensor_record = record
                                 break
                     for record in parammeta:
@@ -489,7 +534,7 @@ def push_new_templates(data,last_record,date_filter,stationmeta,parameta):
                     result_record = None
                     result_param_record=None
                     for record in stationmeta:
-                        if record['stationid'] == station:
+                        if record['stationid'].lower() == station.lower():
                                 result_record = record
                                 break
                     for record in parammeta:
@@ -552,7 +597,7 @@ if __name__ == "__main__":
         #------------------------
         # Check data for missing templates
         #------------------------
-        ###!!!!###  Need to pre-process data file to get into station|date|time|parameter|Value 
+         
         
         #loop through the data file and determine what has to be done for each data point
         last_record = check_data(nfile,unique_offers)
@@ -571,7 +616,7 @@ if __name__ == "__main__":
                     status = i['status'].lower()
                     break
             for i in stationmeta:
-                if k[0] == i['stationid']:
+                if k[0].lower() == i['stationid'].lower():
                     urnorg = i['urn-org'].lower()
                     suborg = i['suborg'].lower()
                     break

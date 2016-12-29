@@ -1,3 +1,3 @@
 #!/bin/bash
 wget $1 -O download.csv
-~/anaconda3/bin/python xml52north.py download.csv $2
+~/anaconda3/bin/python IWN-ingest.py download.csv $2

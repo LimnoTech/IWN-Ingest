@@ -1,9 +1,12 @@
-stationid,shortName,longName,easting,northing,altitude,organization,organizationURL,contact,waterbodyType,urn-org,urn org subpart
-pythoncrbuoy4,crbuoy,crbuoy,-74.579586,41.103145,170.93,NJDEP - Freshwater Biological Monitoring,www.state.nj.us/dep/wms/bfbm/,Mike.Kusmiesz@dep.nj.gov,River/Stream,NJDEP,python
-pythoncrbuoy5,crbuoy,crbuoy,-74.579586,41.103145,170.93,NJDEP - Freshwater Biological Monitoring,www.state.nj.us/dep/wms/bfbm/,Mike.Kusmiesz@dep.nj.gov,River/Stream,NJDEP,python
-pythoncrbuoy6,crbuoy,crbuoy,-74.579586,41.103145,170.93,NJDEP - Freshwater Biological Monitoring,www.state.nj.us/dep/wms/bfbm/,Mike.Kusmiesz@dep.nj.gov,River/Stream,NJDEP,python
-pythoncrbuoy7,crbuoy,crbuoy,-74.579586,41.103145,170.93,NJDEP - Freshwater Biological Monitoring,www.state.nj.us/dep/wms/bfbm/,Mike.Kusmiesz@dep.nj.gov,River/Stream,NJDEP,python
-pythoncrbuoy3,crbuoy,crbuoy,-74.579586,41.103145,170.93,NJDEP - Freshwater Biological Monitoring,www.state.nj.us/dep/wms/bfbm/,Mike.Kusmiesz@dep.nj.gov,River/Stream,NJDEP,python
-mrbuoy,mrbuoy,Mystic River Buoy at Blessing of the Bay,-71.090129,42.399288,0,EPA Region 1,https://www.epa.gov/mysticriver/live-water-quality-data-mystic-river,Tom Faber 617-918-8672,River/Stream,epa,epar1
-crbuoy,crbuoy,Charles River Buoy at the Boston Museum of Science,-71.071376,42.367187,0,EPA Region 1,https://www.epa.gov/charlesriver/live-water-quality-data-lower-charles-river,Tom Faber 617-918-8672,River/Stream,epa,epar1
-grssy0,grssy0,Grassy Fork,-84.015242,39.132832,100,Clermont County Water Resources Department,http://wrd.clermontcountyohio.gov/,hlubbers@clermontcountyohio.gov,Edge of Field,oh-cty-cle,wrd
+stationid,shortName,longName,easting,northing,altitude,organization,organizationURL,contat,waterbodyType,urn-org,urn org subpart
+SHYLR1.7,SHYLR1.7,Shayler,-84.216348,39.118305,100,Clermont County Water Resources Department,http://wrd.clermontcountyohio.gov/,hlubbers@clermontcountyohio.gov,River/Stream,oh-cty-cle,wrd
+EFRM34.8,EFRM34.8,Williamsburg,-84.050381,39.052474,100,Clermont County Water Resources Department,http://wrd.clermontcountyohio.gov/,hlubbers@clermontcountyohio.gov,River/Stream,oh-cty-cle,wrd
+STEFLMR,STEFLMR,Stonelick,-84.199102,39.122187,100,Clermont County Water Resources Department,http://wrd.clermontcountyohio.gov/,hlubbers@clermontcountyohio.gov,River/Stream,oh-cty-cle,wrd
+GRSSY0.2,GRSSY0.2,Grassy Fork ,-84.015242,39.132832,100,Clermont County Water Resources Department,http://wrd.clermontcountyohio.gov/,hlubbers@clermontcountyohio.gov,River/Stream,oh-cty-cle,wrd
+CWLBP ,CWLBP ,downstream CWL,-84.0134,39.1842,100,Clermont County Water Resources Department,http://wrd.clermontcountyohio.gov/,hlubbers@clermontcountyohio.gov,River/Stream,oh-cty-cle,wrd
+SVBEFF,SVBEFF,effluent to SVB,-84.0134,39.1843,100,Clermont County Water Resources Department,http://wrd.clermontcountyohio.gov/,hlubbers@clermontcountyohio.gov,Facility,oh-cty-cle,wrd
+SVBINF,SVBINF,influent to SVB,-84.0131,39.1854,100,Clermont County Water Resources Department,http://wrd.clermontcountyohio.gov/,hlubbers@clermontcountyohio.gov,Facility,oh-cty-cle,wrd
+USCWL,USCWL,upstream CWL,-84.0138,39.1876,100,Clermont County Water Resources Department,http://wrd.clermontcountyohio.gov/,hlubbers@clermontcountyohio.gov,River/Stream,oh-cty-cle,wrd
+EOFWS,EOFWS,RCPP edge-of-field (South),-83.974,39.152,100,Clermont County Water Resources Department,http://wrd.clermontcountyohio.gov/,hlubbers@clermontcountyohio.gov,Edge of Field,oh-cty-cle,wrd
+EOFWN,EOFWN,RCPP edge-of-field (north),-83.974,39.152,100,Clermont County Water Resources Department,http://wrd.clermontcountyohio.gov/,hlubbers@clermontcountyohio.gov,Edge of Field,oh-cty-cle,wrd
+bb04a,pythontest,RCPP edge-of-field (north),-83.974,39.152,100,Clermont County Water Resources Department,http://wrd.clermontcountyohio.gov/,hlubbers@clermontcountyohio.gov,Edge of Field,oh-cty-cle,wrd
