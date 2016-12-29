@@ -181,16 +181,18 @@ def read_station_meta(station_meta_path,metadata_headers):
     stationdata_l = []
     with open(station_meta_path) as fr:
         stat_reader = csv.reader(fr)
-        for i,row in enumerate(stat_reader):
+        for i,rawrow in enumerate(stat_reader):
+            row = [escape(entry) for entry in rawrow] #escape the station metadata
             if i == 0:
                 continue #skip header row
             else: 
                 try:
+                    #print(row)
                     dict_l = dict(zip(metadata_headers,row)) #escape the string for xml
                 except :
                     print("station metadata - header mismatch") #if zip fails (likely because number of columns don't match)
-                    print(metadata_headers)
-                    print(escape(row))
+                    #print(metadata_headers)
+                    #print(escape(row))
                 stationdata_l.append(dict_l)
     return stationdata_l
 
