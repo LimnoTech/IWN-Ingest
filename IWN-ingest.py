@@ -353,6 +353,8 @@ def check_dates(data_file,last_record):
                 continue
             elif last_record[j][0] != 'ok':
                 date_filter.append(True)
+            elif args.skipdata:
+                date_filter.append(True)
             else:
                 date = row[1]
                 time = row[2]
@@ -556,15 +558,18 @@ def push_new_templates(data,last_record,date_filter,stationmeta,parameta):
 
 if __name__ == "__main__":
     #Parse arguments
-    parser = argparse.ArgumentParser()
-    parser.add_argument("d", help="data file relative location")
-    parser.add_argument("c", help="config file relative location")
+    parser = argparse.ArgumentParser(description="Interoperable Watershed Network 52 North SOS Ingester")
+    parser.add_argument("d", metavar="[data file]", help="data file relative location")
+    parser.add_argument("c", metavar="[config file]", help="config file relative location")
+    parser.add_argument("-s","--skipdata", help="bypass server date check and push all data",action="store_true")
     args = parser.parse_args()
-
 
     log_entry("*","*************")
     log_entry("*","Start Program")
     log_entry("*","*************")
+    if args.skipdata:
+        print("* Skipping data check. Pushing all data to server regardless of date.")
+        log_entry("*","SKIPPING DATA CHECK. PUSHING ALL DATA TO SERVER REGARDLESS OF DATE")
     filelist = glob("temp/PART_*.csv")
     for nfile in filelist:
         os.remove(nfile)
