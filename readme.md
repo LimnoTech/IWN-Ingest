@@ -1,6 +1,6 @@
 ## Interoperable Watershed Network – Configuration for SOS Data Ingestion
 
-This document describes the contents of important files for ingestion of observation data into an Interoperable Watershed Network (IWN) 52N SOS-based data appliance. The IWN is EPA's pilot portal for discovery of and access to continuous water quality sensor data collected by agencies arounf the United States. Thw IWN consists of three components:
+This document describes the contents of important files for ingestion of observation data into an Interoperable Watershed Network (IWN) 52N SOS-based data appliance. The IWN is EPA's pilot portal for discovery of and access to continuous water quality sensor data collected by agencies around the United States. The IWN consists of three components:
 * Distributed "data appliances" that agencies use to make their data and associated metadata available through standardized web services;
 * A centralized catalog that harvests metadata from registered data appliances; and
 * A discovery tool that leverages the data appliance and catalog APIs to deliver search and access capabilities.
